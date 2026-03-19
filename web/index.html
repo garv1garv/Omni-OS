@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni-OS Control Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        
+        <!-- Header Section -->
+        <header class="glass-panel main-header">
+            <div class="brand">
+                <div class="pulse-ring">
+                    <div class="status-indicator" id="connection-status"></div>
+                </div>
+                <h1>OMNI-OS</h1>
+                <span class="badge" id="uptime-badge">00:00:00</span>
+                <span class="badge profile-badge" id="profile-badge">DEFAULT</span>
+            </div>
+            <div class="header-controls">
+                <!-- Kill Switch -->
+                <div class="kill-switch-wrapper">
+                    <label class="kill-switch-label" for="kill-switch">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                        PRIVACY
+                    </label>
+                    <label class="switch kill-switch">
+                        <input type="checkbox" id="kill-switch">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <button id="restart-btn" class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Restart
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Column: Controls & Stats -->
+            <div class="column left-col">
+                
+                <!-- Autonomy Slider -->
+                <section class="glass-panel autonomy-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Autonomy Level
+                    </h2>
+                    <div class="autonomy-display">
+                        <span class="autonomy-value" id="autonomy-value">80</span>
+                        <span class="autonomy-unit">%</span>
+                    </div>
+                    <input type="range" id="autonomy-slider" min="0" max="100" value="80" class="styled-range">
+                    <div class="autonomy-labels">
+                        <span>🔒 Supervised</span>
+                        <span>🤖 Autonomous</span>
+                    </div>
+                    <p class="autonomy-hint" id="autonomy-hint">AI will execute tools autonomously</p>
+                </section>
+
+                <!-- Context Profiles -->
+                <section class="glass-panel profiles-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Context Profiles
+                    </h2>
+                    <div class="profile-buttons">
+                        <button class="profile-btn active" data-profile="default">
+                            <span class="profile-icon">⚡</span>Default
+                        </button>
+                        <button class="profile-btn" data-profile="developer">
+                            <span class="profile-icon">💻</span>Developer
+                        </button>
+                        <button class="profile-btn" data-profile="study">
+                            <span class="profile-icon">📚</span>Study
+                        </button>
+                        <button class="profile-btn" data-profile="sentinel">
+                            <span class="profile-icon">🛡️</span>Sentinel
+                        </button>
+                        <button class="profile-btn" data-profile="coworking">
+                            <span class="profile-icon">☕</span>Co-Work
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Settings Panel -->
+                <section class="glass-panel settings-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        Configuration
+                    </h2>
+                    
+                    <div class="control-group">
+                        <label>Gemini API Key</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="api-key" placeholder="AIzaSy...">
+                            <button class="icon-btn" id="toggle-pw" title="Show/Hide">👁</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Model Engine</label>
+                        <select id="model-select">
+                            <option value="gemini-2.5-flash-native-audio-latest">gemini-2.5-flash-native-audio-latest</option>
+                            <option value="gemini-2.0-flash-exp">gemini-2.0-flash-exp</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Screen FPS</label>
+                        <select id="fps-select">
+                            <option value="1">1 FPS</option>
+                            <option value="2">2 FPS</option>
+                            <option value="5">5 FPS</option>
+                        </select>
+                    </div>
+
+                    <div class="switch-group">
+                        <div class="switch-label">
+                            <span class="title">Safe Mode</span>
+                            <span class="desc">Blocks destructive CLI commands</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="safe-mode" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="switch-group">
+                        <div class="switch-label">
+                            <span class="title">Failsafe (PyAutoGUI)</span>
+                            <span class="desc">Abort actions if mouse hits corner</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="failsafe" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <button id="save-config" class="btn btn-primary full-width">Apply Changes</button>
+                    <div id="save-toast" class="toast hidden">Settings applied dynamically</div>
+                </section>
+
+                <!-- Statistics Panel -->
+                <section class="glass-panel stats-panel">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                        Session Stats
+                    </h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-audio">0</span>
+                            <span class="stat-label">Audio Chunks</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-screen">0</span>
+                            <span class="stat-label">Screen Frames</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-tools">0</span>
+                            <span class="stat-label">Tool Calls</span>
+                        </div>
+                        <div class="stat-card error-card">
+                            <span class="stat-value" id="stat-errors">0</span>
+                            <span class="stat-label">Errors</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Live Context & Logs -->
+            <div class="column right-col">
+
+                <!-- Fatigue Indicator -->
+                <section class="glass-panel fatigue-panel">
+                    <div class="fatigue-content">
+                        <div class="fatigue-header">
+                            <span class="fatigue-icon" id="fatigue-icon">🟢</span>
+                            <span class="fatigue-label">Session Health</span>
+                            <span class="fatigue-time" id="fatigue-time">0.0h / 4.0h</span>
+                        </div>
+                        <div class="fatigue-bar-track">
+                            <div class="fatigue-bar-fill" id="fatigue-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Last Action Banner -->
+                <section class="glass-panel highlight-panel">
+                    <div class="highlight-content">
+                        <div class="label">Latest Tool Action</div>
+                        <div class="value mono" id="last-tool-action">—</div>
+                    </div>
+                </section>
+
+                <!-- AI Speech Transcript -->
+                <section class="glass-panel transcript-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            AI Thoughts & Speech
+                        </h2>
+                    </div>
+                    <div class="speech-bubble" id="last-ai-speech">
+                        <span class="typing-indicator">Waiting for voice input...</span>
+                    </div>
+                </section>
+
+                <!-- Inner Monologue Panel -->
+                <section class="glass-panel monologue-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            Inner Monologue
+                        </h2>
+                    </div>
+                    <div class="monologue-container" id="monologue-output">
+                        <div class="monologue-entry"><span class="mono-time">[--:--:--]</span> Awaiting activity...</div>
+                    </div>
+                </section>
+
+                <!-- Action Log Terminal -->
+                <section class="glass-panel terminal-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                            Live Event Log
+                        </h2>
+                        <button class="icon-btn" id="clear-log" title="Clear Logs">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                    <div class="terminal-container" id="terminal-output">
+                        <!-- Log entries injected here via JS -->
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
